@@ -1,0 +1,49 @@
+{% load staticfiles accounts_extras %}
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+    {% block content %}
+    <h2>Order List</h2>
+    <table class="table">
+        <thead class="thead-inverse">
+        <td>
+        <th>ID</th>
+        <th>User</th>
+        <th>Birthday</th>
+        <th>Eligble</th>
+        <th>Random Number</th>
+        <th>BizzFuzz</th>
+        <th>Edit</th>
+        </td>
+        </thead>
+        {% for user in users %}
+        <tr>
+            <th></th>
+            <td>{{ user.user_id }}</td>
+            <td>{{ user.user }}</td>
+            <td>{{ user.birthday }}</td>
+            <td class="get_age">{{ user.birthday|get_age }}</td>
+            <td>{{ user.number }}</td>
+            <td class="bizzfuzz">{{ user.number|bizz_fuzz }}</td>
+            <td>
+                <a href="/api/user/{{ user.user_id }}" role="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/api/user/add" data-original-title="Make a PUT request on the User Instance resource"
+                    class="btn btn-primary js-tooltip" >ADD
+    </a>
+
+    {% endblock %}
+</div>
+
+</body>
+</html>

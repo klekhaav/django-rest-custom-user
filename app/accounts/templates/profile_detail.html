@@ -1,0 +1,22 @@
+{% load staticfiles rest_framework %}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+
+<h1>User - {{ user.user }}</h1>
+
+<form action="/user/{{ user.user_id }}/"
+      method="POST"  enctype="multipart/form-data"
+      class="form-horizontal">
+    {% csrf_token %}
+    {% render_form serializer template_pack='rest_framework/vertical' %}
+    <button type="submit" name="post" class="btn btn-default btn-lg glyphicon glyphicon-save"></button>
+    <button type="submit" name="delete" class="btn btn-default btn-lg glyphicon glyphicon-remove"></button>
+</form>
+
+</body>
+</html>
